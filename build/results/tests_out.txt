@@ -1,0 +1,7 @@
+Breakpoint 1 at 0xf2: file source/main.c, line 23.
+Note: automatically using hardware breakpoints for read-only addresses.
+======================================================
+Running all tests..."
+
+"PINA: 0x0f =>  PORTC: 0x3f - gas full"..."PINA: 0x0d =>  PORTC: 0x3f - not full, but meter still says so"..."PINA: 0x0b =>  PORTC: 0x3e - full - 1"..."PINA: 0x08 =>  PORTC: 0x3c - full - 2"..."PINA: 0x05 =>  PORTC: 0x38 - full - 3"..."PINA: 0x04 =>  PORTC: 0x70 - full - 4 with gas light"..."PINA: 0x01 =>  PORTC: 0x60 - full - 5 with gas light"..."PINA: 0x00 =>  PORTC: 0x40 - empty with gas light"...======================================================
+Remote doesn't know how to detach
