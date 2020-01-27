@@ -26,118 +26,118 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-test "Initial - PINA: 0x00 => PORTC: 0x07"
+test "Initial - PINA: 0x03 => PORTC: 0x07"
 set state = start
-setPINA 0x00
+setPINA 0x03
 continue 5
 expectPORTC 0x07
 checkResult
 
-test "Increment - PINA: 0x00, 0x01 => PORTC: 0x08"
+test "Increment - PINA: 0x03, 0x02 => PORTC: 0x08"
 set state = start
-setPINA 0x00
+setPINA 0x03
 continue 5
-setPINA 0x01
+setPINA 0x02
 continue 5
 expectPORTC 0x08
 checkResult
 
-test "Decrement - PINA: 0x00, 0x02 => PORTC: 0x06"
+test "Decrement - PINA: 0x03, 0x01 => PORTC: 0x06"
 set state = start
-setPINA 0x00
+setPINA 0x03
 continue 5
-setPINA 0x02
+setPINA 0x01
 continue 5
 expectPORTC 0x06
 checkResult
 
-test "max - PINA: 0x00, 0x01, 0x00, 0x01, 0x00, 0x01 => PORTC: 0x09"
+test "max - PINA: 0x03, 0x02, 0x03, 0x02, 0x03, 0x02 => PORTC: 0x09"
 set state = start
-setPINA 0x00
+setPINA 0x03
 continue 5
-setPINA 0x01
+setPINA 0x02
 continue 5
-setPINA 0x00
+setPINA 0x03
 continue 5
-setPINA 0x01
+setPINA 0x02
 continue 5
-setPINA 0x00
+setPINA 0x03
 continue 5
-setPINA 0x01
+setPINA 0x02
 continue 5
 expectPORTC 0x09
 checkResult
 
-test "min - PINA: 8*(0x00, 0x02)  => PORTC: 0x00"
+test "min - PINA: 8*(0x03, 0x01)  => PORTC: 0x00"
 set state = start
-setPINA 0x00
-continue 5
-setPINA 0x02
-continue 5
-setPINA 0x00
-continue 5
-setPINA 0x02
-continue 5
-setPINA 0x00
-continue 5
-setPINA 0x02
-continue 5
-setPINA 0x00
-continue 5
-setPINA 0x02
-continue 5
-setPINA 0x00
-continue 5
-setPINA 0x02
-continue 5
-setPINA 0x00
-continue 5
-setPINA 0x02
-continue 5
-setPINA 0x00
-continue 5
-setPINA 0x02
-continue 5
-setPINA 0x00
-continue 5
-setPINA 0x02
-continue 5
-expectPORTC 0x00
-checkResult
-
-test "double pressed 1 - PINA: 0x00, 0x01, 0x03 => PORTC: 0x00"
-set state = start
-setPINA 0x00
+setPINA 0x03
 continue 5
 setPINA 0x01
 continue 5
 setPINA 0x03
 continue 5
+setPINA 0x01
+continue 5
+setPINA 0x03
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x03
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x03
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x03
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x03
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x03
+continue 5
+setPINA 0x01
+continue 5
 expectPORTC 0x00
 checkResult
 
-test "double pressed 2 - PINA: 0x00, 0x02, 0x03 => PORTC: 0x00"
+test "double pressed 1 - PINA: 0x03, 0x02, 0x00 => PORTC: 0x00"
 set state = start
-setPINA 0x00
+setPINA 0x03
 continue 5
 setPINA 0x02
 continue 5
-setPINA 0x03
+setPINA 0x00
 continue 5
 expectPORTC 0x00
 checkResult
 
-test "double pressed 1 + increment - PINA: 0x00, 0x01, 0x03, 0x00, 0x01 => PORTC: 0x01"
+test "double pressed 2 - PINA: 0x03, 0x01, 0x00 => PORTC: 0x00"
 set state = start
-setPINA 0x00
+setPINA 0x03
 continue 5
 setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTC 0x00
+checkResult
+
+test "double pressed 1 + increment - PINA: 0x03, 0x02, 0x00, 0x03, 0x02 => PORTC: 0x01"
+set state = start
+setPINA 0x03
+continue 5
+setPINA 0x02
+continue 5
+setPINA 0x00
 continue 5
 setPINA 0x03
 continue 5
-setPINA 0x00
-continue 5
-setPINA 0x01
+setPINA 0x02
 continue 5
 expectPORTC 0x01
 checkResult

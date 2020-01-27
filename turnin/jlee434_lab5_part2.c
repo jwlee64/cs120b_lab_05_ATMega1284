@@ -15,7 +15,7 @@
 enum States { start, none_pressed, A0_pressed, A1_pressed, both_pressed } state;
 
 void tick() {
-	unsigned char a = (PINA & 0x03);
+	unsigned char a = (~PINA & 0x03);
 	switch ( state ){
 		case start: 
 			state = none_pressed; 
@@ -71,8 +71,8 @@ void tick() {
 
 int main(void) {
     
-    DDRA = 0x00; PORTA = 0xff;
-    DDRC = 0xff; PORTC = 0x00;
+    DDRA = 0x00; PORTA = 0xFF;
+    DDRC = 0xFF; PORTC = 0x00;
 
     state = start;
 

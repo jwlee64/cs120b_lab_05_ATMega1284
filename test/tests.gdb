@@ -1,4 +1,4 @@
-# Test file for "lab3"
+# Test file for "cs120b_lab_05_ATMega1284"
 
 
 # commands.gdb provides the following functions for ease:
@@ -14,7 +14,7 @@
 #   setPINx <val>
 #       With x as the port or pin (A,B,C,D)
 #       The value to set the pin to (can be decimal or hexidecimal
-#       Example: setPINA 0x01
+#       Example: setPINA 0x00
 #   printPORTx f OR printPINx f 
 #       With x as the port or pin (A,B,C,D)
 #       With f as a format option which can be: [d] decimal, [x] hexadecmial (default), [t] binary 
@@ -26,52 +26,537 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-test "PINA: 0x0f =>  PORTC: 0x3f - gas full"
-setPINA 0x0f
-continue 5
-expectPORTC 0x3f
-checkResult
-
-test "PINA: 0x0d =>  PORTC: 0x3f - not full, but meter still says so"
-setPINA 0x0d
-continue 5
-expectPORTC 0x3f
-checkResult
-
-test "PINA: 0x0b =>  PORTC: 0x3e - full - 1"
-setPINA 0x0b
-continue 5
-expectPORTC 0x3e
-checkResult
-
-test "PINA: 0x08 =>  PORTC: 0x3c - full - 2"
-setPINA 0x08
-continue 5
-expectPORTC 0x3c
-checkResult
-
-test "PINA: 0x05 =>  PORTC: 0x38 - full - 3"
-setPINA 0x05
-continue 5
-expectPORTC 0x38
-checkResult
-
-test "PINA: 0x04 =>  PORTC: 0x70 - full - 4 with gas light"
-setPINA 0x04
-continue 5
-expectPORTC 0x70
-checkResult
-
-test "PINA: 0x01 =>  PORTC: 0x60 - full - 5 with gas light"
+test "initial - PINA: 0x01 => PORTB: 0x00"
+set state = start
 setPINA 0x01
 continue 5
-expectPORTC 0x60
+expectPORTB 0x00 
 checkResult
 
-test "PINA: 0x00 =>  PORTC: 0x40 - empty with gas light"
+test "initial - PINA: (0x01, 0x00)*1 => PORTB: 0x01"
+set state = start
+setPINA 0x01
+continue 5
 setPINA 0x00
 continue 5
-expectPORTC 0x40
+expectPORTB 0x01 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*2 => PORTB: 0x03"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x03 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*3 => PORTB: 0x07"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x07 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*4 => PORTB: 0x0F"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x0f 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*5 => PORTB: 0x1F"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x1f 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*7 => PORTB: 0x00"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x00 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*8 => PORTB: 0x20"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x20 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*9 => PORTB: 0x30"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x30 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*10 => PORTB: 0x38"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x38 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*11 => PORTB: 0x3C"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x3C 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*12 => PORTB: 0x3E"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x3E 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*13 => PORTB: 0x3F"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x3F 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*14 => PORTB: 0x00"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x00 
+checkResult
+
+test "initial - PINA: (0x01, 0x00)*15 => PORTB: 0x01"
+set state = start
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x01 
 checkResult
 
 # Add tests below

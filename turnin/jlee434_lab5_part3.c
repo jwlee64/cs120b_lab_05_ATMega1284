@@ -23,7 +23,7 @@ void tick() {
 			goingBack = 0x00;
 			break;
 		case but_up:
-			if ( PINA == 0x01 ){
+		  if (~PINA & 0x01 ){
 				state = but_down;
 				if (PORTB >= 0x3f){
 					PORTB = 0x00;
@@ -39,7 +39,7 @@ void tick() {
 			}
 			break;
 		case but_down:
-			if ( PINA == 0x00 ){
+			if (!(~PINA & 0x01 )){
 				state = but_up;
 			}
 			break;
@@ -51,9 +51,10 @@ void tick() {
 
 int main(void) {
     /* Insert DDR and PORT initializations */
-    DDRA = 0x00; PORTA = 0xff;
-	DDRB = 0xff; PORTB = 0x00;
+    DDRA = 0x00; PORTA = 0xFF;
+    DDRB = 0xFF; PORTB = 0x00;
     /* Insert your solution below */
+    state = start;
     while (1) {
     	tick();
     }

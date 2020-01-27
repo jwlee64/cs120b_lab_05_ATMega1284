@@ -1,4 +1,4 @@
-/*	Author: jlee434
+/*	Author: josiahlee
  *  Partner(s) Name: Shiyou Wang
  *	Lab Section:
  *	Assignment: Lab #  Exercise #
@@ -12,38 +12,51 @@
 #include "simAVRHeader.h"
 #endif
 
+enum States { start, but_up, but_down,  } state;
+char goingBack;
+
+void tick() {
+	switch ( state ){
+		case start: 
+			state = but_up;
+			PORTB = 0x00;
+			goingBack = 0x00;
+			break;
+		case but_up:
+		  if (~PINA & 0x01 ){
+				state = but_down;
+				if (PORTB >= 0x3f){
+					PORTB = 0x00;
+					if (!goingBack)
+					 	goingBack = 0x01;
+					else
+						goingBack = 0x00;
+				}else if (!goingBack) {
+					PORTB = ( PORTB <<1 ) + 0x01;
+				}else if (goingBack){
+					PORTB = ( PORTB >> 1 ) + 0x20;
+				}
+			}
+			break;
+		case but_down:
+			if (!(~PINA & 0x01 )){
+				state = but_up;
+			}
+			break;
+		default: state = start; 
+			break;
+	}
+}
+
+
 int main(void) {
     /* Insert DDR and PORT initializations */
-	DDRA = 0x00; PORTA = 0xff;
-	DDRC = 0xff; PORTC = 0x00;
-
-	unsigned char a;
-	unsigned char c;
+    DDRA = 0x00; PORTA = 0xFF;
+    DDRB = 0xFF; PORTB = 0x00;
     /* Insert your solution below */
+    state = start;
     while (1) {
-		a = PINA & 0x0f;
-		if ( a >= 13 ){
-			c = 0x3f; //0011 1111
-		}
-		else if ( a >= 10 ){
-			c = 0x3e; //0011 1110
-		}
-		else if ( a >= 7 ){
-			c = 0x3c; //0011 1100
-		}
-		else if ( a >= 5 ){
-			c = 0x38; //0011 1000
-		}
-		else if ( a >= 3 ){
-			c = 0x70; //0111 0000
-		}
-		else if ( a >= 1 ){
-			c = 0x60; //0110 0000
-		}
-		else {
-			c = 0x40; //0100 0000
-		}
-		PORTC = c;
+    	tick();
     }
     return 1;
 }
